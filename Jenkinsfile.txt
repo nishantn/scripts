@@ -30,9 +30,8 @@ bat "${mvnHome}\\bin\\mvn -B sonar:sonar"
 } 
 }
 stage 'approve'
-{
 input message: 'Do you want to deploy?', submitter: 'ops'
-}
+
 stage name:'deploy', concurrency: 1
 node {
 def jdk = tool 'jdk7'
