@@ -31,7 +31,7 @@ bat "${mvnHome}\\bin\\mvn -B sonar:sonar"
 }
 stage 'approve'
 timeout(time: 60, unit: 'SECONDS') {
-input message: 'Do you want to deploy?', submitter: 'ops'
+input message: 'Do you want to deploy?', ok: 'Deploy', submitter: 'ops'
 }
 stage name:'deploy' 
 node {
