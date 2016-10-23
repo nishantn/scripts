@@ -36,5 +36,5 @@ def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
 unstash 'source'  
-bat "${mvnHome}\\bin\\mvn -B tomcat7:deploy"  
+bat "${mvnHome}\\bin\\mvn -B cargo:deploy"  
 }
