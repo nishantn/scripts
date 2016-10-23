@@ -1,12 +1,14 @@
-stage 'build' 
-node {
-git 'https://github.com/nishantn/petclinicdemo.git' 
-
 def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
   
 def mvnHome = tool 'M3'
-bat "${mvnHome}\\bin\\mvn -B verify"
+
+
+stage 'build' 
+node {
+git 'https://github.com/nishantn/petclinicdemo.git' 
+
+bat "${mvnHome}\\bin\\mvn -B compile"
 }
 
 stage 'test'
