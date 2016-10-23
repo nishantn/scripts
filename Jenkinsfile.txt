@@ -22,7 +22,7 @@ bat "${mvnHome}\\bin\\mvn -B compile"
 }
 }, 'quality': {
 node {
-def jdk = tool 'jdk7'
+def jdk = tool 'jdk8'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
 unstash 'source'  
@@ -35,7 +35,9 @@ input message: 'Do you want to deploy?', submitter: 'ops'
 }
 stage name:'deploy', concurrency: 1
 node {
-unstash 'source' withEnv(["PATH+MAVEN=${tool 'M3'}/bin"]) {
-sh "mvn cargo:deploy" 
-    }
+def jdk = tool 'jdk7'
+env.JAVA_HOME = "${jdk}"
+def mvnHome = tool 'M3'
+unstash 'source'  
+bat "${mvnHome}\\bin\\mvn -B tomcat7:deploy"  
 }
