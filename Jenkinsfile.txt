@@ -1,7 +1,8 @@
 stage 'build' 
 node {
-git 'https://github.com/nishantn/petclinicdemo.git' withEnv(["PATH+MAVEN=${tool 'M3'}\\bin"]) {
-bat "mvn -B –Dmaven.test.failure.ignore=true clean package"
+git 'https://github.com/nishantn/petclinicdemo.git' 
+def mvnHome = tool 'M3'
+bat "${mvnHome}\\bin\\mvn -B verify"
 }
 stash excludes: 'target/', includes: '**', name: 'source'
 }
