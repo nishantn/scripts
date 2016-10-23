@@ -7,6 +7,8 @@ env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
 
 bat "${mvnHome}\\bin\\mvn -B compile"
+stash excludes: 'target\\', includes: '**', name: 'source'
+
 }
 
 stage 'test'
