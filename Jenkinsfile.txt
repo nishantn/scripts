@@ -1,5 +1,5 @@
 stage 'build' 
-node {
+node('master') {
 git 'https://github.com/nishantn/petclinicdemo.git' 
 
 def jdk = tool 'jdk7'
@@ -11,9 +11,9 @@ stash excludes: 'target\\', includes: '**', name: 'source'
 
 }
 
-node 'test'
+stage 'test'
 parallel 'integration': {
-master {
+node('master') {
 def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
@@ -21,7 +21,7 @@ unstash 'source'
 bat "${mvnHome}\\bin\\mvn -B compile"        
 }
 }, 'quality': {
-node {
+node('master') {
 def jdk = tool 'jdk8'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
@@ -31,7 +31,7 @@ bat "${mvnHome}\\bin\\mvn -B sonar:sonar"
 }
 
 stage name:'deploy' 
-node {
+node('master') {
 def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
