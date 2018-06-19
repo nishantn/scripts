@@ -12,7 +12,7 @@ stash excludes: 'target/', includes: '**', name: 'source'
 }
 
 stage 'test'
-parallel 'integration': {
+//parallel 'integration': {
 node('master') {
 def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
@@ -20,15 +20,15 @@ def mvnHome = tool 'M3'
 unstash 'source'  
 sh "${mvnHome}/bin/mvn -B compile"        
 }
-}, 'quality': {
-node('master') {
-def jdk = tool 'jdk8'
-env.JAVA_HOME = "${jdk}"
-def mvnHome = tool 'M3'
-unstash 'source'  
-sh "${mvnHome}/bin/mvn -B sonar:sonar"   
-} 
-}
+//}, 'quality': {
+//node('master') {
+//def jdk = tool 'jdk8'
+//env.JAVA_HOME = "${jdk}"
+//def mvnHome = tool 'M3'
+//unstash 'source'  
+//sh "${mvnHome}/bin/mvn -B sonar:sonar"   
+//} 
+//}
 
 stage name:'deploy' 
 node('master') {
