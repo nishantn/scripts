@@ -22,7 +22,7 @@ sh "${mvnHome}/bin/mvn -B compile"
 }
 }, 'quality': {
 node('master') {
-def jdk = tool 'jdk8'
+def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
 unstash 'source'  
