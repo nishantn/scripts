@@ -36,5 +36,5 @@ def jdk = tool 'jdk7'
 env.JAVA_HOME = "${jdk}"
 def mvnHome = tool 'M3'
 unstash 'source'  
-sh "${mvnHome}/bin/mvn -B tomcat7:redeploy"  
+//sh "${mvnHome}/bin/mvn -B tomcat7:redeploy"  
 }
